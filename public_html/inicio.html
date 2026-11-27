@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Yoshi Tech</title>
+    <script>
+        try {
+            var t = localStorage.getItem('yoshiTema');
+            if (t) document.documentElement.dataset.tema = t;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-interna" data-pagina="inicio">
+
+    <section class="hero">
+        <div class="hero-texto">
+            <md-assist-chip label="Soporte técnico de alto nivel">
+                <md-icon slot="icon">verified</md-icon>
+            </md-assist-chip>
+            <h1>Potencia y repara tu <span>setup o laptop</span></h1>
+            <p class="hero-desc">Mantenimiento especializado, reparación de equipos y ensamblaje. Llevamos el rendimiento de tu máquina al máximo nivel.</p>
+            <div class="hero-botones">
+                <md-filled-button href="servicios.html">
+                    Ver servicios
+                    <md-icon slot="icon">build</md-icon>
+                </md-filled-button>
+                <md-outlined-button href="galeria.html">
+                    Ver trabajos
+                    <md-icon slot="icon">photo_library</md-icon>
+                </md-outlined-button>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <md-elevated-card class="tarjeta-3d">
+                <div class="logo-container">
+                    <img src="imagenes/logo-yoshitech.png" alt="Logo Yoshi Tech" class="yoshitech-logo">
+                </div>
+                <div class="nft-info">
+                    <h2>Edición especial</h2>
+                    <p class="creator">Hardware y software por <span>Yoshi</span></p>
+                    <div class="rendimiento" id="rendimiento">
+                        <div class="price-row">
+                            <span class="eth-price" title="Haz doble clic" ondblclick="activarOverclock(this)">Rendimiento 72%</span>
+                            <span class="time-left">Activo</span>
+                        </div>
+                        <md-linear-progress value="0.72" aria-label="Rendimiento del equipo"></md-linear-progress>
+                    </div>
+                </div>
+            </md-elevated-card>
+        </div>
+    </section>
+
+    <section class="proceso">
+        <h2 class="subtitulo">Cómo trabajamos</h2>
+        <ol class="pasos">
+            <li>
+                <md-filled-card>
+                    <div class="paso-cabecera"><md-icon>search</md-icon></div>
+                    <h3>Diagnóstico</h3>
+                    <p>Revisamos tu equipo y te explicamos qué falla y por qué.</p>
+                </md-filled-card>
+            </li>
+            <li>
+                <md-filled-card>
+                    <div class="paso-cabecera"><md-icon>request_quote</md-icon></div>
+                    <h3>Presupuesto</h3>
+                    <p>Te damos el costo antes de tocar nada. Sin sorpresas.</p>
+                </md-filled-card>
+            </li>
+            <li>
+                <md-filled-card>
+                    <div class="paso-cabecera"><md-icon>task_alt</md-icon></div>
+                    <h3>Entrega</h3>
+                    <p>Recibes tu equipo probado, limpio y funcionando.</p>
+                </md-filled-card>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Botón flotante (FAB extendido) de Material Design -->
+    <md-fab class="fab-cotizar" variant="primary" label="Cotizar" onclick="location.href='contacto.html'">
+        <md-icon slot="icon">chat</md-icon>
+    </md-fab>
+
+    <script src="js/material.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

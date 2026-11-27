@@ -1,0 +1,71 @@
+// =========================================================
+//  TOKENS DE MATERIAL DESIGN 3 (sin el color)
+//  Material organiza el diseño en "tokens": variables con nombre
+//  que guardan una decisión de diseño. Hay 3 niveles:
+//    --md-ref-*  → valores de referencia (ej. la tipografía)
+//    --md-sys-*  → decisiones del sistema (ej. "título grande")
+//    --md-*-*    → tokens de cada componente (ej. el botón)
+//  Aquí se guardan en mapas de SASS y un @each los convierte
+//  en variables CSS que leen los componentes de Material Web.
+// =========================================================
+
+// --- Tipografías de referencia ---
+// "brand" = la de la marca (títulos), "plain" = la de lectura
+$tipografias: (
+  brand: "'Space Grotesk', 'Roboto', system-ui, sans-serif",
+  plain: "'Roboto', system-ui, sans-serif",
+);
+
+// --- Escala tipográfica de MD3 ---
+// nombre: (tipografía, tamaño, alto de línea, peso, espaciado)
+$escala-tipografica: (
+  display-large:   (brand, 57px, 64px, 400, -0.25px),
+  display-medium:  (brand, 45px, 52px, 400, 0),
+  display-small:   (brand, 36px, 44px, 500, 0),
+  headline-large:  (brand, 32px, 40px, 500, 0),
+  headline-medium: (brand, 28px, 36px, 500, 0),
+  headline-small:  (brand, 24px, 32px, 500, 0),
+  title-large:     (brand, 22px, 28px, 500, 0),
+  title-medium:    (plain, 16px, 24px, 500, 0.15px),
+  title-small:     (plain, 14px, 20px, 500, 0.1px),
+  body-large:      (plain, 16px, 24px, 400, 0.5px),
+  body-medium:     (plain, 14px, 20px, 400, 0.25px),
+  body-small:      (plain, 12px, 16px, 400, 0.4px),
+  label-large:     (plain, 14px, 20px, 500, 0.1px),
+  label-medium:    (plain, 12px, 16px, 500, 0.5px),
+  label-small:     (plain, 11px, 16px, 500, 0.5px),
+);
+
+// --- Formas (radio de las esquinas) ---
+$formas: (
+  none: 0,
+  extra-small: 4px,
+  small: 8px,
+  medium: 12px,
+  large: 16px,
+  extra-large: 28px,
+  full: 9999px,
+);
+
+// --- Movimiento: curvas y duraciones de MD3 ---
+$curvas: (
+  standard: cubic-bezier(0.2, 0, 0, 1),
+  emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1),
+  emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15),
+);
+$duraciones: (
+  short2: 100ms,
+  short4: 200ms,
+  medium2: 300ms,
+  medium4: 400ms,
+  long2: 500ms,
+);
+
+// --- Clases de tamaño de ventana de MD3 (breakpoints) ---
+//   compacta  < 600px  → celulares
+//   mediana   600–839  → tablets   (barra lateral = "navigation rail")
+//   expandida ≥ 840px  → escritorio (barra lateral = "navigation drawer")
+$ventanas: (
+  mediana: 600px,
+  expandida: 840px,
+);

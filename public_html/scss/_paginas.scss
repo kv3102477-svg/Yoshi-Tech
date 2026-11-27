@@ -1,0 +1,620 @@
+// =========================================================
+//  PÁGINAS INTERNAS (se ven dentro del iframe)
+// =========================================================
+@use 'mixins' as *;
+
+body.pagina-interna {
+  min-height: 100vh;
+  padding: 32px 40px 48px;
+  background-color: color(surface);
+  // Animación de entrada (semana 9) con la curva "emphasized" de MD3
+  animation: entrar var(--md-sys-motion-duration-long2) var(--md-sys-motion-easing-emphasized-decelerate) both;
+
+  @include hasta(mediana) {
+    padding: 24px 16px 96px;
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.titulo-pagina {
+  @include tipo(display-small);
+  margin-bottom: 8px;
+
+  span {
+    color: color(primary);
+  }
+}
+
+.intro {
+  @include tipo(body-large);
+  color: color(on-surface-variant);
+  max-width: 62ch;
+  margin-bottom: 28px;
+}
+
+.subtitulo {
+  @include tipo(headline-small);
+  margin-bottom: 16px;
+}
+
+// Personalización de componentes Material con sus tokens --md-*
+md-filled-button,
+md-outlined-button,
+md-filled-tonal-button,
+md-text-button,
+md-elevated-button {
+  --md-filled-button-label-text-weight: 600;
+}
+
+md-outlined-card,
+md-filled-card,
+md-elevated-card {
+  --md-outlined-card-container-shape: #{forma(large)};
+  --md-filled-card-container-shape: #{forma(large)};
+  --md-elevated-card-container-shape: #{forma(large)};
+}
+
+// =========================================================
+//  INICIO
+// =========================================================
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.hero-texto {
+  flex: 1 1 360px;
+  max-width: 580px;
+
+  md-assist-chip {
+    margin-bottom: 20px;
+    --md-assist-chip-outline-color: #{color(tertiary)};
+    --md-assist-chip-label-text-color: #{color(tertiary)};
+    --md-assist-chip-icon-color: #{color(tertiary)};
+  }
+
+  h1 {
+    @include tipo(display-medium);
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-size: clamp(2.1rem, 4.5vw, 2.85rem);
+    line-height: 1.12;
+
+    span {
+      // Degradado primary → tertiary (con prefijo -webkit-, semana 11)
+      background: linear-gradient(135deg, color(primary), color(tertiary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+.hero-desc {
+  @include tipo(body-large);
+  color: color(on-surface-variant);
+  margin-bottom: 28px;
+}
+
+.hero-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+// Tarjeta 3D (transformaciones, semana 10) hecha con una card de Material
+.card-container {
+  flex: 0 0 auto;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.tarjeta-3d {
+  display: block;
+  width: 300px;
+  padding: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  // La elevación de Material sube al pasar el mouse
+  --md-elevated-card-container-elevation: 2;
+  --md-elevated-card-container-color: #{color(surface-container-low)};
+
+  .card-container:hover & {
+    transform: rotateY(12deg) rotateX(8deg) scale3d(1.04, 1.04, 1.04);
+    --md-elevated-card-container-elevation: 5;
+  }
+}
+
+.logo-container {
+  height: 190px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: forma(medium);
+  // el logo es blanco/amarillo: fondo oscuro fijo con brillo cian
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.28) 0%, transparent 68%), #101818;
+}
+
+.yoshitech-logo {
+  max-width: 78%;
+  max-height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.35));
+  transform: translateZ(40px);
+  transition: transform 0.6s ease;
+
+  .card-container:hover & {
+    transform: translateZ(70px) scale(1.08);
+  }
+}
+
+.nft-info {
+  transform: translateZ(20px);
+
+  h2 {
+    @include tipo(title-large);
+  }
+}
+
+.creator {
+  @include tipo(body-medium);
+  color: color(on-surface-variant);
+  margin-bottom: 16px;
+
+  span {
+    color: color(primary);
+    font-weight: 700;
+  }
+}
+
+.rendimiento {
+  padding: 12px 14px;
+  border-radius: forma(medium);
+  @include superficie(surface-container-highest, on-surface);
+
+  md-linear-progress {
+    width: 100%;
+    margin-top: 10px;
+    --md-linear-progress-track-shape: #{forma(full)};
+    --md-linear-progress-track-height: 6px;
+    --md-linear-progress-active-indicator-height: 6px;
+  }
+
+  &.overclock md-linear-progress {
+    --md-linear-progress-active-indicator-color: #{color(tertiary)};
+  }
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eth-price {
+  @include tipo(label-large);
+  color: color(primary);
+  cursor: pointer;
+  user-select: none;
+
+  .overclock & {
+    color: color(tertiary);
+  }
+}
+
+.time-left {
+  @include tipo(label-medium);
+  color: color(on-surface-variant);
+}
+
+// "Cómo trabajamos": pasos numerados con contadores CSS
+.pasos {
+  list-style: none;
+  counter-reset: paso;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+
+  li {
+    counter-increment: paso;
+  }
+
+  md-filled-card {
+    height: 100%;
+    padding: 20px;
+  }
+
+  .paso-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    &::before {
+      content: counter(paso, decimal-leading-zero);
+      @include tipo(headline-medium);
+      color: color(tertiary);
+    }
+
+    md-icon {
+      color: color(primary);
+    }
+  }
+
+  h3 {
+    @include tipo(title-medium);
+    margin-bottom: 4px;
+  }
+
+  p {
+    @include tipo(body-medium);
+    color: color(on-surface-variant);
+  }
+}
+
+// Botón flotante (FAB) para cotizar
+.fab-cotizar {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  animation: aparecer-fab var(--md-sys-motion-duration-long2) var(--md-sys-motion-easing-emphasized-decelerate) 0.4s both;
+}
+
+@keyframes aparecer-fab {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(24px);
+  }
+}
+
+// =========================================================
+//  SERVICIOS
+// =========================================================
+.filtros {
+  margin-bottom: 24px;
+}
+
+.filtros-titulo {
+  @include tipo(label-large);
+  color: color(on-surface-variant);
+  margin-bottom: 8px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  transition: opacity movimiento(medium2), transform movimiento(medium2);
+
+  &[hidden] {
+    display: none;
+  }
+
+  h3 {
+    @include tipo(title-large);
+    margin-bottom: 8px;
+  }
+
+  > p {
+    @include tipo(body-medium);
+    color: color(on-surface-variant);
+  }
+}
+
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  border-radius: forma(large);
+  @include superficie(primary-container, on-primary-container);
+  --md-icon-size: 28px;
+
+  [data-categoria='software'] & {
+    @include superficie(tertiary-container, on-tertiary-container);
+  }
+
+  [data-categoria='redes'] & {
+    @include superficie(secondary-container, on-secondary-container);
+  }
+}
+
+.categoria {
+  @include tipo(label-small);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: color(on-surface-variant);
+  margin-bottom: 4px;
+}
+
+// Detalle desplegable: truco de grid-template-rows 0fr → 1fr (transición)
+.detalle {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows movimiento(medium4, emphasized-decelerate);
+
+  > div {
+    overflow: hidden;
+  }
+
+  p {
+    @include tipo(body-medium);
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: forma(medium);
+    @include superficie(surface-container-high, on-surface);
+  }
+
+  .abierto & {
+    grid-template-rows: 1fr;
+  }
+}
+
+.tarjeta-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+
+  .btn-detalle md-icon {
+    transition: rotate movimiento(medium2);
+  }
+
+  .abierto & .btn-detalle md-icon {
+    rotate: 180deg;
+  }
+}
+
+.sin-resultados {
+  @include tipo(body-large);
+  color: color(on-surface-variant);
+  padding: 24px 0;
+}
+
+// =========================================================
+//  GALERÍA
+// =========================================================
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+
+  figure {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: forma(large);
+    background-color: color(surface-container-low);
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    @include tipo(title-small);
+
+    md-icon {
+      --md-icon-size: 20px;
+      color: color(primary);
+    }
+  }
+}
+
+.foto {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: color(surface-container-highest);
+  cursor: zoom-in;
+  outline: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform movimiento(long2);
+  }
+
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+// Si la foto no existe se muestra un aviso
+.sin-imagen {
+  .foto {
+    cursor: default;
+    display: grid;
+    place-items: center;
+
+    img {
+      display: none;
+    }
+
+    &::after {
+      content: 'Falta la foto en /imagenes';
+      @include tipo(body-medium);
+      color: color(on-surface-variant);
+    }
+  }
+}
+
+.visor-imagen {
+  --md-dialog-container-max-inline-size: min(92vw, 900px);
+  max-width: min(92vw, 900px);
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 62vh;
+    margin: 0 auto;
+    border-radius: forma(medium);
+  }
+}
+
+// =========================================================
+//  CONTACTO (formulario con componentes Material)
+// =========================================================
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px;
+  max-width: 760px;
+
+  .completo {
+    grid-column: 1 / -1;
+  }
+
+  md-outlined-text-field,
+  md-filled-text-field,
+  md-outlined-select {
+    width: 100%;
+  }
+
+  @include hasta(mediana) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grupo {
+  border: 0;
+
+  legend {
+    @include tipo(title-small);
+    margin-bottom: 8px;
+    color: color(on-surface-variant);
+  }
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.opcion {
+  @include tipo(body-large);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  cursor: pointer;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.opcion-switch {
+  justify-content: space-between;
+  width: 100%;
+  max-width: 360px;
+}
+
+.slider-titulo {
+  @include tipo(title-small);
+  color: color(on-surface-variant);
+}
+
+md-slider {
+  width: 100%;
+  max-width: 420px;
+}
+
+.acciones-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.enviando {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 16px;
+}
+
+.resumen-envio {
+  max-width: 760px;
+  margin-top: 24px;
+  padding: 20px 24px;
+
+  h2 {
+    @include tipo(title-large);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    @include tipo(body-medium);
+    color: color(on-surface-variant);
+  }
+
+  md-chip-set {
+    margin-top: 12px;
+  }
+}
+
+// Snackbar de MD3 (no existe aún en Material Web, se hace con tokens)
+.snackbar {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 6px 8px 6px 16px;
+  border-radius: forma(extra-small);
+  @include superficie(inverse-surface, inverse-on-surface);
+  @include tipo(body-medium);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, 150%);
+  opacity: 0;
+  transition: transform movimiento(medium4, emphasized-decelerate), opacity movimiento(short4);
+
+  &.visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  md-text-button {
+    --md-text-button-label-text-color: #{color(inverse-primary)};
+  }
+}

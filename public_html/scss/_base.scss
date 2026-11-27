@@ -1,0 +1,104 @@
+// =========================================================
+//  BASE: fuentes locales, reseteo y estilos generales    
+// =========================================================
+@use 'mixins' as *;
+
+// Fuentes guardadas en /fuentes → funciona sin internet
+@each $peso in 400, 500, 700 {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: $peso;
+    font-display: swap;
+    src: url('../fuentes/roboto-latin-#{$peso}-normal.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: $peso;
+    font-display: swap;
+    src: url('../fuentes/space-grotesk-latin-#{$peso}-normal.woff2') format('woff2');
+  }
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../fuentes/material-symbols-outlined.woff2') format('woff2');
+}
+
+// Reseteo solo de etiquetas HTML normales. OJO: un selector "*" también
+// le quitaría el padding a los componentes <md-...> (los estilos de la
+// página ganan a los de su :host), por eso se listan las etiquetas.
+// Tampoco se tocan los elementos con slot="" (van dentro de un componente,
+// ej. el título de <md-dialog>), y :where() deja la especificidad en 0.
+:where(html, body, div, section, article, header, footer, aside, main, nav,
+h1, h2, h3, h4, p, ul, ol, li, figure, figcaption, form, fieldset, legend,
+label, a, span, img, button, iframe, code, strong):where(:not([slot])),
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  @include tipo(body-large);
+  @include superficie(surface, on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: color(outline-variant) transparent;
+  transition: background-color movimiento(medium2), color movimiento(medium2);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Icono "relleno" (eje FILL de la fuente variable)
+md-icon.relleno,
+.relleno md-icon {
+  font-variation-settings: 'FILL' 1;
+}
+
+// Los componentes aún no cargados no "saltan" al aparecer
+:not(:defined) {
+  visibility: hidden;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// Respeta a quien prefiere menos movimiento
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+// "hidden" debe ocultar también a los componentes Material
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,71 @@
+// =========================================================
+//  TEMA: convierte los mapas de SASS en variables CSS
+//  (custom properties) que entienden los componentes Material.
+// =========================================================
+@use 'sass:list';
+@use 'tokens' as t;
+@use 'tokens-color' as c;
+
+@mixin emitir-colores($mapa) {
+  @each $rol, $valor in $mapa {
+    --md-sys-color-#{$rol}: #{$valor};
+  }
+}
+
+:root {
+  // Tipografías de referencia
+  @each $nombre, $familia in t.$tipografias {
+    --md-ref-typeface-#{$nombre}: #{$familia};
+  }
+
+  // Escala tipográfica → --md-sys-typescale-title-large-size, etc.
+  @each $nombre, $v in t.$escala-tipografica {
+    --md-sys-typescale-#{$nombre}-font: var(--md-ref-typeface-#{list.nth($v, 1)});
+    --md-sys-typescale-#{$nombre}-size: #{list.nth($v, 2)};
+    --md-sys-typescale-#{$nombre}-line-height: #{list.nth($v, 3)};
+    --md-sys-typescale-#{$nombre}-weight: #{list.nth($v, 4)};
+    --md-sys-typescale-#{$nombre}-tracking: #{list.nth($v, 5)};
+  }
+
+  @each $nombre, $radio in t.$formas {
+    --md-sys-shape-corner-#{$nombre}: #{$radio};
+  }
+  @each $nombre, $curva in t.$curvas {
+    --md-sys-motion-easing-#{$nombre}: #{$curva};
+  }
+  @each $nombre, $tiempo in t.$duraciones {
+    --md-sys-motion-duration-#{$nombre}: #{$tiempo};
+  }
+
+  // Iconos: Material Symbols (fuente local)
+  --md-icon-font: 'Material Symbols Outlined';
+
+  // Tema claro por defecto
+  @include emitir-colores(c.$tema-claro);
+  color-scheme: light;
+}
+
+// Si el sistema está en modo oscuro y el usuario no eligió nada
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    @include emitir-colores(c.$tema-oscuro);
+    color-scheme: dark;
+  }
+}
+
+// Elección manual con el botón del header
+:root[data-tema='oscuro'] {
+  @include emitir-colores(c.$tema-oscuro);
+  color-scheme: dark;
+}
+
+// Clases utilitarias de la escala: .md-typescale-title-large, etc.
+@each $nombre, $v in t.$escala-tipografica {
+  .md-typescale-#{$nombre} {
+    font-family: var(--md-sys-typescale-#{$nombre}-font);
+    font-size: var(--md-sys-typescale-#{$nombre}-size);
+    line-height: var(--md-sys-typescale-#{$nombre}-line-height);
+    font-weight: var(--md-sys-typescale-#{$nombre}-weight);
+    letter-spacing: var(--md-sys-typescale-#{$nombre}-tracking);
+  }
+}

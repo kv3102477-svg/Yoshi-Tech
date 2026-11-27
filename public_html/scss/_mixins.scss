@@ -1,0 +1,39 @@
+// =========================================================
+//  MIXINS Y FUNCIONES DE SASS (semanas 5–7)
+// =========================================================
+@use 'sass:map';
+@use 'tokens' as t;
+
+// Aplica un estilo de la escala tipográfica:  @include tipo(title-large);
+@mixin tipo($nombre) {
+  font-family: var(--md-sys-typescale-#{$nombre}-font);
+  font-size: var(--md-sys-typescale-#{$nombre}-size);
+  line-height: var(--md-sys-typescale-#{$nombre}-line-height);
+  font-weight: var(--md-sys-typescale-#{$nombre}-weight);
+  letter-spacing: var(--md-sys-typescale-#{$nombre}-tracking);
+}
+
+// Atajos para leer tokens:  color(primary) → var(--md-sys-color-primary)
+@function color($rol) {
+  @return var(--md-sys-color-#{$rol});
+}
+@function forma($nombre) {
+  @return var(--md-sys-shape-corner-#{$nombre});
+}
+@function movimiento($duracion, $curva: standard) {
+  @return var(--md-sys-motion-duration-#{$duracion}) var(--md-sys-motion-easing-#{$curva});
+}
+
+// Media queries con nombre:  @include desde(expandida) { ... }
+@mixin desde($ventana) {
+  @media (min-width: map.get(t.$ventanas, $ventana)) { @content; }
+}
+@mixin hasta($ventana) {
+  @media (max-width: (map.get(t.$ventanas, $ventana) - 0.02px)) { @content; }
+}
+
+// Capa de estado (hover/pressed) al estilo Material, para elementos propios
+@mixin superficie($fondo, $texto) {
+  background-color: color($fondo);
+  color: color($texto);
+}

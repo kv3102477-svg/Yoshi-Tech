@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoshi Tech | Soporte Técnico Especializado</title>
+    <meta name="description" content="Yoshi Tech: mantenimiento, reparación y ensamblaje de laptops y PCs en Villa El Salvador, Lima.">
+    <meta name="theme-color" content="#006a6a">
+    <link rel="icon" href="imagenes/logo-yoshitech.png">
+    <!-- Tema guardado (claro/oscuro) antes de pintar, para que no parpadee -->
+    <script>
+        try {
+            var t = localStorage.getItem('yoshiTema');
+            if (t) document.documentElement.dataset.tema = t;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="marco">
+
+    <!-- 1. HEADER (estático) = "Top app bar" de Material Design -->
+    <header class="header">
+        <a href="inicio.html" target="contenido" class="logo" data-pagina="inicio">
+            <md-focus-ring></md-focus-ring>
+            <md-ripple></md-ripple>
+            <img src="imagenes/logo-yoshitech.png" alt="" class="logo-img">
+            <span class="logo-text">Yoshi<span>Tech</span></span>
+        </a>
+        <p class="header-lema">Mantenimiento, reparación y ensamblaje de equipos</p>
+
+        <div class="header-acciones">
+            <md-icon-button id="btn-tema" toggle aria-label="Cambiar entre modo claro y oscuro" title="Modo claro / oscuro">
+                <md-icon>dark_mode</md-icon>
+                <md-icon slot="selected">light_mode</md-icon>
+            </md-icon-button>
+        </div>
+    </header>
+
+    <!-- 2. BARRA LATERAL (estática) = "Navigation drawer" de Material Design -->
+    <aside class="sidebar">
+        <p class="sidebar-titulo">Menú</p>
+        <nav aria-label="Menú principal">
+            <ul class="menu">
+                <li>
+                    <a href="inicio.html" target="contenido" class="menu-link activo" data-pagina="inicio" aria-current="page">
+                        <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                        <span class="menu-icono"><md-icon>home</md-icon></span>
+                        <span class="etiqueta-larga">Inicio</span><span class="etiqueta-corta">Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="servicios.html" target="contenido" class="menu-link" data-pagina="servicios">
+                        <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                        <span class="menu-icono"><md-icon>build</md-icon></span>
+                        <span class="etiqueta-larga">Servicios</span><span class="etiqueta-corta">Servicios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="galeria.html" target="contenido" class="menu-link" data-pagina="galeria">
+                        <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                        <span class="menu-icono"><md-icon>photo_library</md-icon></span>
+                        <span class="etiqueta-larga">Galería de imágenes</span><span class="etiqueta-corta">Galería</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contacto.html" target="contenido" class="menu-link" data-pagina="contacto">
+                        <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                        <span class="menu-icono"><md-icon>support_agent</md-icon></span>
+                        <span class="etiqueta-larga">Contacto</span><span class="etiqueta-corta">Contacto</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 3. PÁGINA PRINCIPAL (lo único que cambia) -->
+    <main class="principal">
+        <iframe name="contenido" src="inicio.html" class="visor" title="Contenido de Yoshi Tech"></iframe>
+    </main>
+
+    <!-- 4. FOOTER (estático) -->
+    <footer class="footer">
+        <div class="footer-marca">
+            <h3>Yoshi<span>Tech</span></h3>
+            <p>Soluciones informáticas y soporte técnico de confianza.</p>
+            <p class="ubicacion"><md-icon>location_on</md-icon>Villa El Salvador, Lima</p>
+        </div>
+        <div class="footer-datos">
+            <p class="dato-nombre">Grupo 4</p>
+            <p>Ingeniería de Sistemas e Informática</p>
+            <p>Hojas de Estilo en Cascada Avanzado</p>
+        </div>
+        <p class="footer-copy">&copy; 2026 Yoshi Tech. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/material.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

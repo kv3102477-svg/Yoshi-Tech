@@ -1,0 +1,23 @@
+{
+    "name": "css_grupo4",
+    "version": "1.0.0",
+    "description": "Yoshi Tech — Grupo 4 · Hojas de Estilo en Cascada Avanzado · Semana 16: Material Design 3",
+    "scripts": {
+        "tema": "esbuild scripts/generar-tema.mjs --bundle --platform=node --format=esm --log-level=warning --outfile=node_modules/.cache/tema.mjs && node node_modules/.cache/tema.mjs",
+        "build:css": "sass public_html/scss/styles.scss public_html/css/styles.css --no-source-map",
+        "build:js": "esbuild src/js/material.js --bundle --minify --format=iife --legal-comments=none --outfile=public_html/js/material.js",
+        "build": "npm run tema && npm run build:css && npm run build:js",
+        "dev": "sass public_html/scss/styles.scss public_html/css/styles.css --no-source-map --watch"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "@fontsource/roboto": "^5.3.0",
+        "@fontsource/space-grotesk": "^5.3.0",
+        "@material/material-color-utilities": "^0.4.0",
+        "@material/web": "^2.5.0",
+        "esbuild": "^0.28.2",
+        "material-symbols": "^0.49.0",
+        "sass": "^1.108.2"
+    },
+    "private": true
+}

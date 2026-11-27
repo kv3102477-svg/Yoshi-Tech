@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | Yoshi Tech</title>
+    <script>
+        try {
+            var t = localStorage.getItem('yoshiTema');
+            if (t) document.documentElement.dataset.tema = t;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-interna" data-pagina="servicios">
+
+    <h1 class="titulo-pagina">Nuestros <span>servicios</span></h1>
+    <p class="intro">Filtra por tipo de trabajo y abre el detalle de cada servicio.</p>
+
+    <!-- Chips de filtro de Material Design -->
+    <div class="filtros">
+        <p class="filtros-titulo" id="titulo-filtros">Filtrar por categoría</p>
+        <md-chip-set id="filtros" aria-labelledby="titulo-filtros">
+            <md-filter-chip label="Hardware" data-filtro="hardware"></md-filter-chip>
+            <md-filter-chip label="Software" data-filtro="software"></md-filter-chip>
+            <md-filter-chip label="Redes e impresoras" data-filtro="redes"></md-filter-chip>
+        </md-chip-set>
+    </div>
+
+    <div class="services-grid">
+
+        <md-outlined-card class="service-card" data-categoria="hardware">
+            <div class="service-icon"><md-icon>laptop_mac</md-icon></div>
+            <p class="categoria">Hardware</p>
+            <h3>Reparación de laptops</h3>
+            <p>Diagnóstico y solución de fallas de hardware y software para que tu equipo vuelva a volar.</p>
+            <div class="detalle" id="detalle-1"><div><p>Trabajamos con placas base, reballing, cambios de pantalla y ampliación de RAM y SSD.</p></div></div>
+            <div class="tarjeta-acciones">
+                <md-text-button class="btn-detalle" trailing-icon aria-controls="detalle-1" onclick="toggleDetalle(this)">
+                    Ver detalle<md-icon slot="icon">expand_more</md-icon>
+                </md-text-button>
+                <md-filled-tonal-button href="contacto.html?servicio=laptop">Cotizar</md-filled-tonal-button>
+            </div>
+        </md-outlined-card>
+
+        <md-outlined-card class="service-card" data-categoria="hardware">
+            <div class="service-icon"><md-icon>mode_fan</md-icon></div>
+            <p class="categoria">Hardware</p>
+            <h3>Mantenimiento de PCs</h3>
+            <p>Limpieza profunda, cambio de pasta térmica y optimización para máxima fluidez y menores temperaturas.</p>
+            <div class="detalle" id="detalle-2"><div><p>Recomendamos cambiar la pasta térmica al menos una vez al año para evitar el thermal throttling.</p></div></div>
+            <div class="tarjeta-acciones">
+                <md-text-button class="btn-detalle" trailing-icon aria-controls="detalle-2" onclick="toggleDetalle(this)">
+                    Ver detalle<md-icon slot="icon">expand_more</md-icon>
+                </md-text-button>
+                <md-filled-tonal-button href="contacto.html?servicio=mantenimiento">Cotizar</md-filled-tonal-button>
+            </div>
+        </md-outlined-card>
+
+        <md-outlined-card class="service-card" data-categoria="hardware">
+            <div class="service-icon"><md-icon>memory</md-icon></div>
+            <p class="categoria">Hardware</p>
+            <h3>Ensamblaje de PC</h3>
+            <p>Armamos tu PC a medida: elegimos piezas compatibles según tu presupuesto y lo que vas a hacer con ella.</p>
+            <div class="detalle" id="detalle-3"><div><p>Incluye gestión de cables, pruebas de estrés y configuración del BIOS para que rinda desde el primer día.</p></div></div>
+            <div class="tarjeta-acciones">
+                <md-text-button class="btn-detalle" trailing-icon aria-controls="detalle-3" onclick="toggleDetalle(this)">
+                    Ver detalle<md-icon slot="icon">expand_more</md-icon>
+                </md-text-button>
+                <md-filled-tonal-button href="contacto.html?servicio=ensamblaje">Cotizar</md-filled-tonal-button>
+            </div>
+        </md-outlined-card>
+
+        <md-outlined-card class="service-card" data-categoria="software">
+            <div class="service-icon"><md-icon>settings_suggest</md-icon></div>
+            <p class="categoria">Software</p>
+            <h3>Formateo y optimización</h3>
+            <p>Instalación limpia del sistema operativo, drivers y programas, más ajustes para que arranque rápido.</p>
+            <div class="detalle" id="detalle-4"><div><p>Respaldamos tus archivos antes de formatear y te entregamos el equipo con todo actualizado.</p></div></div>
+            <div class="tarjeta-acciones">
+                <md-text-button class="btn-detalle" trailing-icon aria-controls="detalle-4" onclick="toggleDetalle(this)">
+                    Ver detalle<md-icon slot="icon">expand_more</md-icon>
+                </md-text-button>
+                <md-filled-tonal-button href="contacto.html?servicio=software">Cotizar</md-filled-tonal-button>
+            </div>
+        </md-outlined-card>
+
+        <md-outlined-card class="service-card" data-categoria="redes">
+            <div class="service-icon"><md-icon>router</md-icon></div>
+            <p class="categoria">Redes e impresoras</p>
+            <h3>Soporte técnico</h3>
+            <p>Configuración de redes, reparación de impresoras y soluciones a medida para tu estación de trabajo.</p>
+            <div class="detalle" id="detalle-5"><div><p>Configuramos desde redes LAN hasta sistemas de impresión inalámbricos y servidores.</p></div></div>
+            <div class="tarjeta-acciones">
+                <md-text-button class="btn-detalle" trailing-icon aria-controls="detalle-5" onclick="toggleDetalle(this)">
+                    Ver detalle<md-icon slot="icon">expand_more</md-icon>
+                </md-text-button>
+                <md-filled-tonal-button href="contacto.html?servicio=soporte">Cotizar</md-filled-tonal-button>
+            </div>
+        </md-outlined-card>
+
+    </div>
+    <p class="sin-resultados" id="sin-resultados" hidden>No hay servicios en esa categoría.</p>
+
+    <script src="js/material.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

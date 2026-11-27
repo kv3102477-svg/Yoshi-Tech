@@ -1,0 +1,345 @@
+// =========================================================
+//  EL MARCO (index.html)
+//  Header, barra lateral y footer quedan fijos; solo cambia
+//  el iframe del centro. Se arma con CSS Grid (semana 3).
+//    · Escritorio → barra lateral = "navigation drawer" de MD3
+//    · Tablet     → barra lateral = "navigation rail" de MD3
+//    · Celular    → menú horizontal tipo "navigation bar"
+// =========================================================
+@use 'mixins' as *;
+
+$separacion: 12px;
+$ancho-drawer: 280px;
+$ancho-rail: 96px;
+
+body.marco {
+  height: 100vh;
+  height: 100dvh; // navegadores modernos: alto real en celulares
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: $ancho-drawer 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header  header'
+    'sidebar principal'
+    'footer  footer';
+  gap: $separacion;
+  padding: $separacion;
+  background-color: color(surface-container);
+}
+
+// Los 4 paneles comparten "superficie" y forma
+%panel {
+  background-color: color(surface);
+  border-radius: forma(large);
+  transition: background-color movimiento(medium2);
+}
+
+// --- 1. HEADER = "Top app bar" de MD3 ---
+.header {
+  @extend %panel;
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding: 8px 12px 8px 20px;
+}
+
+.logo {
+  position: relative; // para el ripple
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 12px 4px 4px;
+  border-radius: forma(full);
+  text-decoration: none;
+  outline: none;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  object-fit: contain;
+  border-radius: forma(medium);
+  background-color: #101818; // el logo es blanco/amarillo: siempre sobre fondo oscuro
+}
+
+.logo-text {
+  @include tipo(title-large);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  span {
+    color: color(primary);
+  }
+}
+
+.header-lema {
+  @include tipo(body-medium);
+  flex: 1;
+  color: color(on-surface-variant);
+}
+
+.header-acciones {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+// --- 2. BARRA LATERAL = "Navigation drawer" de MD3 ---
+.sidebar {
+  @extend %panel;
+  grid-area: sidebar;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.sidebar-titulo {
+  @include tipo(title-small);
+  color: color(on-surface-variant);
+  padding: 18px 16px 10px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menu-link {
+  position: relative; // el <md-ripple> se dibuja sobre el enlace
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 24px 0 16px;
+  border-radius: forma(full);
+  color: color(on-surface-variant);
+  text-decoration: none;
+  outline: none;
+  @include tipo(label-large);
+  transition: background-color movimiento(short4), color movimiento(short4);
+
+  // El ripple y el foco toman sus colores de estos tokens
+  --md-ripple-hover-color: #{color(on-surface)};
+  --md-ripple-pressed-color: #{color(on-surface)};
+
+  .menu-icono {
+    display: grid;
+    place-items: center;
+  }
+
+  md-icon {
+    transition: font-variation-settings movimiento(medium2);
+  }
+
+  .etiqueta-corta {
+    display: none;
+  }
+
+  // Indicador de la opción activa (píldora de MD3)
+  &.activo {
+    @include superficie(secondary-container, on-secondary-container);
+    font-weight: 700;
+
+    md-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+  }
+}
+
+// --- 3. PRINCIPAL: el único cuadro que cambia ---
+.principal {
+  @extend %panel;
+  grid-area: principal;
+  overflow: hidden;
+}
+
+.visor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+// --- 4. FOOTER ---
+.footer {
+  @extend %panel;
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px 40px;
+  padding: 16px 28px 12px;
+}
+
+.footer-marca {
+  h3 {
+    @include tipo(title-large);
+    font-weight: 700;
+
+    span {
+      color: color(primary);
+    }
+  }
+
+  p {
+    @include tipo(body-medium);
+    color: color(on-surface-variant);
+  }
+
+  .ubicacion {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+    color: color(tertiary);
+
+    md-icon {
+      --md-icon-size: 18px;
+    }
+  }
+}
+
+.footer-datos {
+  text-align: right;
+
+  p {
+    @include tipo(body-medium);
+    color: color(on-surface-variant);
+  }
+
+  .dato-nombre {
+    @include tipo(title-small);
+    color: color(on-surface);
+  }
+}
+
+.footer-copy {
+  @include tipo(body-small);
+  grid-column: 1 / -1;
+  padding-top: 10px;
+  border-top: 1px solid color(outline-variant);
+  color: color(on-surface-variant);
+  text-align: center;
+}
+
+// =========================================================
+//  RESPONSIVE (semana 1) con las clases de ventana de MD3
+// =========================================================
+
+// TABLET: la barra lateral se vuelve "navigation rail"
+@include hasta(expandida) {
+  body.marco {
+    grid-template-columns: $ancho-rail 1fr;
+  }
+
+  .header-lema {
+    display: none;
+  }
+
+  .sidebar {
+    padding: 12px 0;
+  }
+
+  .sidebar-titulo,
+  .menu-link .etiqueta-larga {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .menu-link {
+    flex-direction: column;
+    gap: 4px;
+    height: auto;
+    padding: 0;
+    background: none;
+    @include tipo(label-medium);
+
+    .etiqueta-corta {
+      display: inline;
+    }
+
+    // en el rail el indicador es solo la píldora del icono
+    .menu-icono {
+      width: 56px;
+      height: 32px;
+      border-radius: forma(full);
+      transition: background-color movimiento(short4);
+    }
+
+    md-ripple {
+      inset: 0 auto auto 50%;
+      width: 56px;
+      height: 32px;
+      translate: -50% 0;
+      border-radius: forma(full);
+    }
+
+    &.activo {
+      background: none;
+      color: color(on-surface);
+
+      .menu-icono {
+        @include superficie(secondary-container, on-secondary-container);
+      }
+    }
+  }
+}
+
+// CELULAR: todo apilado y el menú pasa a ser horizontal
+@include hasta(mediana) {
+  body.marco {
+    height: auto;
+    overflow: visible;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'header'
+      'sidebar'
+      'principal'
+      'footer';
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .header {
+    padding-left: 12px;
+  }
+
+  .sidebar {
+    padding: 12px 4px 8px;
+    overflow: visible;
+  }
+
+  // las opciones en una sola fila (como la "navigation bar" de MD3)
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .principal {
+    height: 75vh;
+    height: 75dvh;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .footer-datos {
+    text-align: center;
+  }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Yoshi Tech</title>
+    <script>
+        try {
+            var t = localStorage.getItem('yoshiTema');
+            if (t) document.documentElement.dataset.tema = t;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-interna" data-pagina="contacto">
+
+    <h1 class="titulo-pagina">Pide tu <span>cotización</span></h1>
+    <p class="intro">Cuéntanos qué le pasa a tu equipo y te respondemos con un presupuesto.</p>
+
+    <form id="form-contacto" class="formulario" novalidate>
+
+        <!-- Campos de texto con etiqueta flotante -->
+        <md-outlined-text-field name="nombre" label="Nombre completo" required
+            error-text="Escribe tu nombre" autocomplete="name">
+            <md-icon slot="leading-icon">person</md-icon>
+        </md-outlined-text-field>
+
+        <md-outlined-text-field name="celular" label="Celular" type="tel" required
+            prefix-text="+51 " pattern="9[0-9]{8}" maxlength="9"
+            supporting-text="9 dígitos, empieza con 9" error-text="Revisa el número (9 dígitos)" autocomplete="tel-national">
+            <md-icon slot="leading-icon">smartphone</md-icon>
+        </md-outlined-text-field>
+
+        <!-- Lista desplegable -->
+        <md-outlined-select name="servicio" id="campo-servicio" label="Servicio" required class="completo"
+            error-text="Elige un servicio">
+            <md-icon slot="leading-icon">build</md-icon>
+            <md-select-option value="laptop"><div slot="headline">Reparación de laptops</div></md-select-option>
+            <md-select-option value="mantenimiento"><div slot="headline">Mantenimiento de PCs</div></md-select-option>
+            <md-select-option value="ensamblaje"><div slot="headline">Ensamblaje de PC</div></md-select-option>
+            <md-select-option value="software"><div slot="headline">Formateo y optimización</div></md-select-option>
+            <md-select-option value="soporte"><div slot="headline">Soporte técnico (redes e impresoras)</div></md-select-option>
+        </md-outlined-select>
+
+        <!-- Área de texto (variante "filled") -->
+        <md-filled-text-field name="descripcion" label="¿Qué le pasa a tu equipo?" type="textarea" rows="4"
+            maxlength="300" required error-text="Cuéntanos el problema" class="completo"
+            supporting-text="Ej.: se apaga solo cuando juego, hace mucho ruido…">
+        </md-filled-text-field>
+
+        <!-- Botones de opción (radio) -->
+        <fieldset class="grupo completo">
+            <legend>¿Cómo prefieres que te contactemos?</legend>
+            <div class="opciones" role="radiogroup">
+                <label class="opcion"><md-radio name="medio" value="whatsapp" checked></md-radio>WhatsApp</label>
+                <label class="opcion"><md-radio name="medio" value="llamada"></md-radio>Llamada</label>
+                <label class="opcion"><md-radio name="medio" value="correo"></md-radio>Correo</label>
+            </div>
+        </fieldset>
+
+        <!-- Slider -->
+        <div class="completo">
+            <p class="slider-titulo" id="titulo-antiguedad">Antigüedad del equipo (años)</p>
+            <md-slider name="antiguedad" min="0" max="10" value="3" step="1" ticks labeled
+                aria-labelledby="titulo-antiguedad"></md-slider>
+        </div>
+
+        <!-- Checkbox y switch -->
+        <div class="completo checks">
+            <label class="opcion"><md-checkbox name="recojo" touch-target="wrapper"></md-checkbox>Necesito recojo a domicilio</label>
+            <label class="opcion opcion-switch">Es urgente (atención en 24 h)<md-switch name="urgente" icons></md-switch></label>
+        </div>
+
+        <div class="acciones-form completo">
+            <md-filled-button type="submit">
+                Enviar solicitud
+                <md-icon slot="icon">send</md-icon>
+            </md-filled-button>
+            <md-text-button type="reset">Limpiar</md-text-button>
+        </div>
+    </form>
+
+    <md-linear-progress indeterminate class="enviando" id="enviando" hidden aria-label="Enviando"></md-linear-progress>
+
+    <!-- Resumen de la solicitud (se llena con JavaScript) -->
+    <md-filled-card class="resumen-envio" id="resumen" hidden>
+        <h2><md-icon class="relleno">check_circle</md-icon>Solicitud lista</h2>
+        <p id="resumen-texto"></p>
+        <md-chip-set id="resumen-chips"></md-chip-set>
+    </md-filled-card>
+
+    <!-- Snackbar de Material Design -->
+    <div class="snackbar" id="snackbar" role="status" aria-live="polite">
+        <span id="snackbar-texto"></span>
+        <md-text-button onclick="ocultarSnackbar()">OK</md-text-button>
+    </div>
+
+    <script src="js/material.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

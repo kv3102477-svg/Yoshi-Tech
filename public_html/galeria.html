@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería | Yoshi Tech</title>
+    <script>
+        try {
+            var t = localStorage.getItem('yoshiTema');
+            if (t) document.documentElement.dataset.tema = t;
+        } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-interna" data-pagina="galeria">
+
+    <h1 class="titulo-pagina">Galería de <span>imágenes</span></h1>
+    <p class="intro">Algunos de nuestros trabajos. Haz clic en una foto para verla en grande.</p>
+
+    <div class="galeria">
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-1.jpg" alt="Limpieza interna de una PC de escritorio">
+            </button>
+            <figcaption><md-icon>mode_fan</md-icon>Mantenimiento de PC</figcaption>
+        </figure>
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-2.jpg" alt="Aplicación de pasta térmica sobre un procesador">
+            </button>
+            <figcaption><md-icon>thermostat</md-icon>Cambio de pasta térmica</figcaption>
+        </figure>
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-3.jpg" alt="Laptop abierta durante una reparación">
+            </button>
+            <figcaption><md-icon>laptop_mac</md-icon>Reparación de laptop</figcaption>
+        </figure>
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-4.jpg" alt="PC gamer recién ensamblada con iluminación">
+            </button>
+            <figcaption><md-icon>memory</md-icon>Ensamblaje de PC</figcaption>
+        </figure>
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-5.jpg" alt="Cambio de pantalla de una laptop">
+            </button>
+            <figcaption><md-icon>screenshot_monitor</md-icon>Cambio de pantalla</figcaption>
+        </figure>
+        <figure>
+            <button type="button" class="foto" onclick="abrirImagen(this)">
+                <md-focus-ring></md-focus-ring><md-ripple></md-ripple>
+                <img src="imagenes/galeria-6.jpg" alt="Router y cableado de red configurados">
+            </button>
+            <figcaption><md-icon>router</md-icon>Configuración de red</figcaption>
+        </figure>
+    </div>
+
+    <!-- Visor de imagen ampliada: componente "dialog" de Material Design -->
+    <md-dialog id="visor-imagen" class="visor-imagen">
+        <span slot="headline" class="visor-titulo"></span>
+        <div slot="content">
+            <img src="" alt="">
+        </div>
+        <form slot="actions" method="dialog">
+            <md-text-button value="cerrar">Cerrar</md-text-button>
+        </form>
+    </md-dialog>
+
+    <script src="js/material.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

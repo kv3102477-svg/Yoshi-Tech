@@ -1,0 +1,10 @@
+// =========================================================
+//  YOSHI TECH — Hoja de estilos principal (SASS)
+//  Semana 16: Material Design 3
+//  Se compila con:  npm run build:css   →  public_html/css/styles.css
+//  (o automáticamente al guardar, con el compilador SASS de NetBeans)
+// =========================================================
+@use 'tema';
+@use 'base';
+@use 'marco';
+@use 'paginas';
